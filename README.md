@@ -36,7 +36,13 @@ Prerequisites:
   5) Run createpostgresconn.py in Python terminal.
  
   **Execution Details:**
-  
+    Please make a choice 1)Select Data, 2)Update data: 
+    Option to be entered=1 or 2
+    Option 1: Displays the data of the client_id that was given as input by user.
+    Option 2: Updates the column name selected for the input client_id.
+
+    
+    
 
 
 
