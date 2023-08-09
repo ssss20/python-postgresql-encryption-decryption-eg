@@ -1,6 +1,6 @@
 # python-postgresql-encryption-decryption-eg
 
-# Prerequisites:
+Prerequisites:
 POSTGRESQL:
 - Install postgresql-latest version compatible with your Windows version.
 - Go to start open pgAdmin4 which is installed with the postgresql.
