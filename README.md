@@ -35,7 +35,7 @@ Prerequisites:
   4) Replace all the above values with your defined values.
   5) Run createpostgresconn.py in Python terminal.
  
-  Execution Details:
+  **Execution Details:**
   
 
 
