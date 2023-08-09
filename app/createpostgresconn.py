@@ -23,26 +23,22 @@ db_params = {
     # Establish a connection
 connection = psycopg2.connect(**db_params)
 cursor = connection.cursor()
-value = cursor.execute("select created_on from client_credentials where client_id=6")
 
 def validate_name(name):
     # Regular expression pattern to match first name + last name format
     pattern = r"^[A-Za-z]+ [A-Za-z]+$"
-    
-    
     if re.match(pattern, name):
         return True
     else:
         return False
     
 def validate_email(email):
-    # Regular expression pattern to match a valid email format
     pattern = r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
-    
     if re.match(pattern, email):
         return True
     else:
         return False
+    
 def validate_datetime(datetime_string, format="%Y-%m-%d %H:%M:%S"):
     try:
         # Attempt to parse the input string as a datetime
@@ -56,7 +52,6 @@ def validate_datetime(datetime_string, format="%Y-%m-%d %H:%M:%S"):
         return False
 
 def update_name_value(column_name, new_value, client_id):
-
     while True:
         
         if validate_name(new_value):
@@ -97,6 +92,7 @@ def update_datetime_value(column_name, new_value, client_id):
     update_query = f"UPDATE client_credentials SET {column_name} = %s WHERE client_id = %s"
     cursor.execute(update_query, (new_value, client_id))
     connection.commit()
+    
 def selectData(client_id):
     set_query ="SET timezone TO 'GMT';"
     select_query = "select client_id,pgp_sym_decrypt(encrypted_clientname::bytea, '{}'),pgp_sym_decrypt(encrypted_password::bytea, '{}'),pgp_sym_decrypt(encrypted_email::bytea, '{}'),created_on from client_credentials where client_id= {}".format(namekey,pwdkey,emailkey,client_id)   
@@ -108,24 +104,15 @@ def selectData(client_id):
         for x in data:
             for index,value in enumerate(x):
                 if index == 4:
-                    python_datetime = datetime.strptime(str(value), '%Y-%m-%d %H:%M:%S')
+                    py_datetime = datetime.strptime(str(value), '%Y-%m-%d %H:%M:%S')
                     gmt_timezone = pytz.timezone('GMT')
-                    gmt_datetime = python_datetime.replace(tzinfo=pytz.UTC).astimezone(gmt_timezone)
+                    gmt_datetime = py_datetime.replace(tzinfo=pytz.UTC).astimezone(gmt_timezone)
                     print(gmt_datetime)
                 else:
                     print(value)
-            # if index == 4:
-            #     python_datetime = datetime.strptime(data[index], '%Y-%m-%d %H:%M:%S')
-            #     data[index] =python_datetime.timestamp()
-            #     print(data[index])
-            # else:
-            #     print(data[index])
-        # for x in data: 
-        #     print(x)
     except Exception as e:
         print(e)
-    
-# Example usage:
+
 
 option=input("Please make a choice 1)Select Data, 2)Update data: ")
 if option == "1":
