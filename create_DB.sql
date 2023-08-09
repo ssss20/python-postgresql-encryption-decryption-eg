@@ -7,3 +7,5 @@ CREATE DATABASE "ClientDB"
     TABLESPACE = pg_default
     CONNECTION LIMIT = -1
     IS_TEMPLATE = False;
+
+ALTER DATABASE "ClientDB" OWNER TO postgres;
