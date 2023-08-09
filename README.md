@@ -13,7 +13,7 @@ Prerequisites:
 **Steps to follow:**
 - Open pgAdmin4 login to Server with SUPERUSER postgres and password used during installation.
 - Open SQL window and run the create_DB.sql
-- Run the SQL files in below order in the SQL window:
+- Run the SQL files in sql folder in below order in the SQL window:
   1) create_table.sql
   2) loadData.sql
   3) addencryptedcols.sql(the key mentioned is not an actual key, you can replace it with your symmetric encryption key)
